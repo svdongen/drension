@@ -1,0 +1,16 @@
+REPORT OF 21 MARCH 2018
+
+> What did we do
+- Built a set-up (refer to picture): using a pre-3D printed scaffold for droplet positioning, home-made LED set-up contained in an eppendorf box for diffusion, a breadboard and shock absorbers. 
+- We tried to control a syringe pump by computer. This failed, as the communication via the I/O port was not in line with the provided software communication protocol. We decided to put the problem on hold.
+- We tried to use opendrop, the software in Python from the paper by Tabor. We were unable to run this, due to errors probably caused by a lack of installed modules. We decided to move on to use Matlab as it has a built-in image processing toolbox.
+
+> ToDos
+- Holder for the smarthphone
+- Stability of the light source
+- Implementation of a syringe pump
+
+> Ideas
+- Flow behaviour and elasticity
+- Arduino/RaPI system
+- Hough transform in matlab
