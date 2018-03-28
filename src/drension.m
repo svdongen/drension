@@ -33,12 +33,16 @@ imageToBeCropped = edges_prewitt;
 dimensions = size(imageToBeCropped);
 ranges = [ (floor(droplet(2) - 1.75*droplet(1))) (dimensions(1) - floor(droplet(3) + 1.75*droplet(1))) (ceil(3.5*droplet(1))) (ceil(3.5*droplet(1))) ];
 croppedImage = imcrop(imageToBeCropped, ranges);
-imshow(croppedImage);
+
 
 % Determining the angle and needle width
-
+[ theta, a, b1, b2, d, zMax ] = NeedleAnalysis( croppedImage );
+rotatedImage = imrotate(croppedImage, -1*theta);
+imshow(rotatedImage);
+[ thetaR, aR, b1R, b2R, dR, zMaxR ] = NeedleAnalysis( rotatedImage );
 
 % Generating initial guess for Laplace
+
 
 % making a droplet
 B = 0.01;
