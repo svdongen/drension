@@ -37,6 +37,12 @@ imshow(croppedImage);
 
 % Determining the angle and needle width
 
+
 % Generating initial guess for Laplace
+
+% making a droplet
+B = 0.01;
+M = MakeDroplet( B );
+plot(M(:,2),M(:,3))
 
 % Optimizing against Laplace
