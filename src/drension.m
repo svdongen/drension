@@ -10,6 +10,7 @@ gray_image = rgb2gray(I);
 % TODO: cropping of the image
 
 % Transforming the image to find edges
+edges_prewitt = edge(gray_image,'Prewitt',0.05,'both','nothinning');
 figure('Name','Loaded Image');
 subplot(2,1,1);
 imshow(I);
@@ -45,6 +46,10 @@ imshow(rotatedImage);
 
 % Extracting points from the droplet that are suitable to be fitted against
 % the YL-equation
+figure('Name','Points to work with');
+points = ImageToPoints(rotatedImage);
+scatter(points(:,1),points(:,2));
+
 
 % Generating initial guess for Laplace
 
