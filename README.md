@@ -1,6 +1,6 @@
 # Drension
 
-Drension is a software packagefor the extraction of parameters such as surface tension from pictures of droplets taken by modern smartphones or other photographic equipment.
+Drension is a software package for the extraction of parameters such as surface tension from pictures of droplets taken by modern smartphones or other photographic equipment.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ Please contact us first, before contributing at `sjoerd.vandongen@wur.nl`.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Authors
 
