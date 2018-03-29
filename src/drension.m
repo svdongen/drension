@@ -1,3 +1,8 @@
+% Load Dependencies
+[filepath,name] = fileparts(mfilename('fullpath'));
+addpath(genpath(filepath));
+
+% Load picture
 I = imread('picture.jpg');
 gray_image = rgb2gray(I);
 
