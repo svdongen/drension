@@ -1,6 +1,10 @@
 function [ theta, a, b1, b2, d, zMax ] = NeedleAnalysis( N )
-%NEEDLEANALYSIS Summary of this function goes here
-%   Detailed explanation goes here
+%NEEDLEANALYSIS finds rotation and needle parameters from an edged image with a needle intersecting the top vertically.
+%   N is the binary image ([0 1] containing matrix) to be analyzed.
+%   theta is the angle of rotation and a the gradient
+%   b1 and b2 are horizontal offsets of the needle edges
+%   d is the needle with
+%   zMax is the vertical offset of the end of the needle
 
 % We rotate the image, as this simplifies processing
 N = imrotate(N, 90);

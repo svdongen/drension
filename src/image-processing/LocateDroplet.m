@@ -5,16 +5,21 @@ function [ droplet ] = LocateDroplet( points, minsize, maxsize, dimensions )
 %   maxsize is the maximum box size in pixels
 %   dimensions are the image dimensions
 
+    disp('###');    
+    disp('Locating the droplet in the image...');
+
     totalIts = 0;
 
    numberBoxes = 25;
    deltaBox = 0.075;
    
+    disp('Number of boxes:'); disp(numberBoxes);
+   
    fittingResults = [];
    
    for box = 1:numberBoxes
        
-      disp([box round(box/numberBoxes,2)])
+       disp([box (100*round(box/numberBoxes,2))])
        
        boxSize = floor(minsize + (maxsize - minsize)*box/(numberBoxes - 1));
        thisDeltaBox = ceil(deltaBox * boxSize);
@@ -78,6 +83,9 @@ function [ droplet ] = LocateDroplet( points, minsize, maxsize, dimensions )
    leastError = min(fittingResults(:,4));
    bestTry = round(median(find(fittingResults(:,4) == leastError)));
    droplet = [fittingResults(bestTry,1) fittingResults(bestTry,2) fittingResults(bestTry,3)];
+   
+   disp('Droplet has been located');
+   disp('###');
 
 end
 

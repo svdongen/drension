@@ -1,12 +1,10 @@
 function M = MakeDroplet( B )
-%MAKEDROPLET Summary of this function goes here
-%   Detailed explanation goes here
+%MAKEDROPLET calculates the theoretical droplet profile on the basis of a Bond number and returns a matrix with columns [s r z] information.
+%   B is the Bond number
 
 sspan = 4*pi*(1:10000)/(10000);
 y0 = [0 0.000001 0];
 [s, y] = ode45(@(s,y) YLSystem(s, y, B), sspan, y0);
-figure;
-plot(y(:,2),y(:,3));
 phiTargets = abs(y(:,1)-(pi/2));
 
 Ssaved = [];
