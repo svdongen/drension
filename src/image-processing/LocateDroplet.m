@@ -10,8 +10,8 @@ function [ droplet ] = LocateDroplet( points, minsize, maxsize, dimensions )
 
     totalIts = 0;
 
-   numberBoxes = 25;
-   deltaBox = 0.075;
+   numberBoxes = 30;
+   deltaBox = 0.025;
    
     disp('Number of boxes:'); disp(numberBoxes);
    
@@ -50,26 +50,28 @@ function [ droplet ] = LocateDroplet( points, minsize, maxsize, dimensions )
                
                 
                
-               if numberOfPointsInBox == 0
+               if numberOfPointsInBox < 10
                    continue
                end
                
                thisX0 = round(thisX + 0.5*boxSize);
                thisY0 = round(thisY + 0.5*boxSize);
               % scatter([thisX0 thisX0 thisX0 (thisX0 - thisR) (thisX0 + thisR)],[thisY0 (thisY0 - thisR) (thisY0 + thisR) thisY0 thisY0]);
-              % scatter(pointsInBox(:,1),pointsInBox(:,2));
+              
               
 %                for point = 1:numberOfPointsInBox
 %                    thisError = thisError + abs((pointsInBox(point,1) - thisX0)^2 + (pointsInBox(point,2) - thisY0)^2 - thisR^2);
 %                end               
-               thisError = thisError + std((pointsInBox(:,1) - thisX0).^2 + (pointsInBox(:,2) - thisY0).^2);
-               thisError = thisError + (mean((pointsInBox(:,1) - thisX0)))^2 + (mean((pointsInBox(:,2) - thisY0)))^2;
+               thisError =  thisError + (std((pointsInBox(:,1) - thisX0).^2  + (pointsInBox(:,2) - thisY0).^2)) *((mean((pointsInBox(:,1) - thisX0)))^2 + (mean((pointsInBox(:,2) - thisY0)))^2);
           
                thisError = thisError/numberOfPointsInBox;
                
                totalIts = totalIts  + 1;
                
-               
+%                figure;
+%                scatter(pointsInBox(:,1),pointsInBox(:,2));
+%                title(['error = ' num2str(thisError)]);
+              
                fittingResults = [fittingResults; [thisR thisX0 thisY0 thisError]];
            end
            

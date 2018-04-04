@@ -4,7 +4,7 @@ addpath(genpath(filepath));
 close all;
 
 % Load picture
-I = imread('picture.jpg');
+I = imread('picture2.jpg');
 gray_image = rgb2gray(I);
 
 % TODO: cropping of the image
@@ -12,9 +12,9 @@ gray_image = rgb2gray(I);
 % Transforming the image to find edges
 edges_prewitt = edge(gray_image,'Prewitt',0.05,'both','nothinning');
 figure('Name','Loaded Image');
-subplot(2,1,1);
+subplot(1,2,1);
 imshow(I);
-subplot(2,1,2);
+subplot(1,2,2);
 imshow(edges_prewitt);
 myResult = ImageToPoints(edges_prewitt);
 linkaxes;
@@ -26,8 +26,8 @@ droplet_maximum = 0.25;
 % Locating the droplet
 points = myResult;
 dimensions = size(edges_prewitt);
-minsize = ceil(max(dimensions)*droplet_minimum);
-maxsize = ceil(max(dimensions)*droplet_maximum);
+minsize = ceil(dimensions(2)*droplet_minimum);
+maxsize = ceil(dimensions(2)*droplet_maximum);
 dimensions = [dimensions(2) dimensions(1)];
 droplet = LocateDroplet( points, minsize, maxsize, dimensions );
 
