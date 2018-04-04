@@ -11,7 +11,7 @@ N = imrotate(N, 90);
 points = ImageToPoints(N);
 
 % Define a critical angle, above which rotation is not tolerated
-criticalAngle = 10; % in degrees
+criticalAngle = 5; % in degrees
 criticalAngle = (criticalAngle/360) * 2 * pi; % in radials
 
 % (1) Obtain the two intersects on the top (first 5%) of the cropped image
@@ -42,11 +42,13 @@ criticalZ = [];
 for i = 5:numOfSegments
     xLeft = i*segmentSize - 1;
     xRight = (i+1)*segmentSize + 1;
-    segmentPoints = points(((xLeft < points(:,1)) & (points(:,1) < xRight)),:);   
+    segmentPoints = points(((xLeft < points(:,1)) & (points(:,1) < xRight)),:);
     numOfSegmentPoints = size(segmentPoints(:,1));
+    numOfSegmentPoints = numOfSegmentPoints(1);
     segmentPointsGradients = [ (abs((segmentPoints(:,2) - b1) ./ segmentPoints(:,1))) (abs((segmentPoints(:,2) - b2) ./ segmentPoints(:,1))) ];
     segmentPointsAngles = atan(segmentPointsGradients);
     numOfSegmentPoinsAboveCritical = size( segmentPointsAngles( ((segmentPointsAngles(:,1) > criticalAngle) & (segmentPointsAngles(:,2) > criticalAngle)),1) );
+    numOfSegmentPoinsAboveCritical = numOfSegmentPoinsAboveCritical(1);
     if (numOfSegmentPoinsAboveCritical/numOfSegmentPoints) > 0.1
       criticalZ = [criticalZ xLeft];
     end
@@ -57,7 +59,7 @@ zMax = min(criticalZ) - 1;
 numOfAngles = 101;
 angles = (criticalAngle/((numOfAngles-1)/2))*(((numOfAngles-1)/-2):((numOfAngles-1)/2));
 gradients = tan(angles);
-pointsToBeFitted = points( (points(:,1) < zMax + 1),:); 
+pointsToBeFitted = points( (points(:,1) < zMax + 1),:);
 fittingResults = [];
 for i = 1:numOfAngles
     thisError = 0;
@@ -71,6 +73,7 @@ theta = mean(fittingResults((fittingResults(:,2) == minError),1));
 a = tan(theta);
 d = abs(b2 - b1) * cos(theta);
 theta = 360*theta/(2*pi);
+zMax = min(size(N)) - zMax;
 
 end
 

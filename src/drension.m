@@ -4,7 +4,8 @@ addpath(genpath(filepath));
 close all;
 
 % Load picture
-I = imread('picture2.jpg');
+I = imread('20180328_165355.jpg');
+I = imrotate(I, 90);
 gray_image = rgb2gray(I);
 
 % TODO: cropping of the image
@@ -25,11 +26,15 @@ droplet_maximum = 0.25;
 
 % Locating the droplet
 points = myResult;
-dimensions = size(edges_prewitt);
-minsize = ceil(dimensions(2)*droplet_minimum);
-maxsize = ceil(dimensions(2)*droplet_maximum);
-dimensions = [dimensions(2) dimensions(1)];
-droplet = LocateDroplet( points, minsize, maxsize, dimensions );
+% figure
+% scatter(points(:,1),points(:,2));
+% dimensions = size(edges_prewitt);
+% minsize = ceil(dimensions(2)*droplet_minimum);
+% maxsize = ceil(dimensions(2)*droplet_maximum);
+% dimensions = [dimensions(2) dimensions(1)];
+% droplet = LocateDroplet( points, minsize, maxsize, dimensions );
+
+droplet = [350 1650 2500]; % Found manually!
 
 % Cropping the image
 imageToBeCropped = edges_prewitt;
@@ -46,18 +51,36 @@ imshow(rotatedImage);
 
 % Extracting points from the droplet that are suitable to be fitted against
 % the YL-equation
-figure('Name','Points to work with');
 points = ImageToPoints(rotatedImage);
-scatter(points(:,1),points(:,2));
+[ dropLeft, dropBottom, dropRight ] = FindDropletEdges(points, 25);
 
+% x0 = (b1R+b2R)/2;
+x0 = (dropLeft + dropRight)/2;
+xmin = floor(x0*(1-0.001));
+xmax = ceil(x0*(1+0.001));
+min_y = dropBottom; %min(points(:,2));
+
+points(:,1) = points(:,1) - x0;
+points(:,2) = points(:,2) - min_y;
+max_y = ceil((1/2)*(zMaxR - min_y));
+points = points(( points(:,2) <= max_y ),:);
+
+resizingFactor = 2/(abs(dropLeft - dropRight));
+
+points(:,1) = points(:,1)*resizingFactor;
+points(:,2) = points(:,2)*resizingFactor;
+
+figure('Name','Centered points');
+scatter(points(:,1),points(:,2));
+hold on;
 
 % Generating initial guess for Laplace
-
 
 % Making a droplet
 B = 0.01;
 M = MakeDroplet( B );
-figure('Name','Theoretical Droplet');
+%figure('Name','Theoretical Droplet');
+% Resizing the droplet
 plot(M(:,2),M(:,3))
 
 % Optimizing against Laplace

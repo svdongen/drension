@@ -21,6 +21,10 @@ M = [s y(:,2) y(:,3)];
 M = M(s < Ssaved(1),:);
 M = [(-1*M(:,1)) (-1*M(:,2)) M(:,3); M(:,1) M(:,2) M(:,3)];
 M = sortrows(M);
-
+MLeft = min(M(:,2));
+MRight = max(M(:,2));
+resizingFactor = 2/(abs(MLeft - MRight));
+M(:,2) = M(:,2)*resizingFactor;
+M(:,3) = M(:,3)*resizingFactor;
 end
 
