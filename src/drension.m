@@ -4,7 +4,7 @@ addpath(genpath(filepath));
 close all;
 
 % Load picture
-I = imread('20180328_165355.jpg');
+I = imread('mylongdroplet.jpg');
 I = imrotate(I, 90);
 gray_image = rgb2gray(I);
 
@@ -62,25 +62,54 @@ min_y = dropBottom; %min(points(:,2));
 
 points(:,1) = points(:,1) - x0;
 points(:,2) = points(:,2) - min_y;
-max_y = ceil((1/2)*(zMaxR - min_y));
-points = points(( points(:,2) <= max_y ),:);
+max_y = ceil((2/3)*(zMaxR - min_y));
+cutOffPoints = points(( points(:,2) <= max_y ),:);
+points = points(( points(:,2) <= (zMaxR - min_y)),:);
 
 resizingFactor = 2/(abs(dropLeft - dropRight));
 
-points(:,1) = points(:,1)*resizingFactor;
-points(:,2) = points(:,2)*resizingFactor;
+cutOffPoints(:,1) = cutOffPoints(:,1)*resizingFactor;
+cutOffPoints(:,2) = cutOffPoints(:,2)*resizingFactor;
 
 figure('Name','Centered points');
-scatter(points(:,1),points(:,2));
 hold on;
+% original data
+points(:,1) = points(:,1)*resizingFactor;
+points(:,2) = points(:,2)*resizingFactor;
+scatter(points(:,1),points(:,2),10,[0.5 0.5 0.5]);
+% new data
+scatter(cutOffPoints(:,1),cutOffPoints(:,2),10,[0 0 1]);
 
-% Generating initial guess for Laplace
+% Fitting and Plotting
+iterations = 5;
+BMin = 0.01;
+BMax = 0.5;
+BAccuracy = 0.01;
 
-% Making a droplet
-B = 0.01;
-M = MakeDroplet( B );
-%figure('Name','Theoretical Droplet');
-% Resizing the droplet
-plot(M(:,2),M(:,3))
+BSave = [];
+ErrorsSave = [];
+for step = 1:iterations
+    [BRange, errors] = YLFitter( points, BMin, BMax, BAccuracy );
+    OptimalB = BRange(errors == min(errors));
+    BSave = [BSave BRange];
+    ErrorsSave = [ErrorsSave errors]; 
+    BMin = OptimalB - 2*BAccuracy;
+    BMax = OptimalB + 2*BAccuracy;
+    BAccuracy = BAccuracy/10;
+end
 
-% Optimizing against Laplace
+M = MakeDroplet(OptimalB);
+plot(M(:,2),M(:,3),'--y',...
+'LineWidth',2);
+title(['Bo = ' num2str(OptimalB)])
+daspect([1 1 1])
+
+figure('Name','Optimization Results');
+EI = [BSave.' ErrorsSave.'];
+EI = sortrows(EI);
+plot(EI(:,1),EI(:,2),'-b',...
+'LineWidth',2);
+xlabel('Bo')
+ylabel('Error')
+
+
