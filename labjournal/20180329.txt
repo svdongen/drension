@@ -1,0 +1,13 @@
+REPORT OF 29 MARCH 2018
+
+> What did we do
+- Made video of oscillating droplet using a syringe pump
+- Made code to rotate the picture based on needle angle
+- Made code to find the lowest point of the droplet and center the droplet
+
+> ToDos
+- Fitting pictures against YL model
+
+> Ideas
+- Flow behaviour and elasticity
+- Arduino/RaPI system
