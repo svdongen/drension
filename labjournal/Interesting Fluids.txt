@@ -1,0 +1,6 @@
+Fluid                 γ in (mN·m−1)
+Water                 72.86
+Ethylene glycol       47.3
+Propylene carbonate   41.1
+Diethylene glycol     30.09
+Ethanol               22.39
