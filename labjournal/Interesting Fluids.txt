@@ -1,6 +1,5 @@
-Fluid                 γ in (mN·m−1)
-Water                 72.86
-Ethylene glycol       47.3
-Propylene carbonate   41.1
-Diethylene glycol     30.09
-Ethanol               22.39
+Fluid                 γ in (mN·m−1)   Location
+Water                 72.86           AFSG.BZ.124.ORC.7040.FVC
+Ethylene glycol       47.3            AFSG.BZ.124.PCC.6040.FVC1
+Diethylene glycol     30.09           AFSG.BZ.124.ORC.7040.FVC
+Ethanol               22.39           AFSG.BZ.124.ORC.7040.FVC
