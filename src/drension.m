@@ -13,17 +13,17 @@ deltaRho = 1000*0.997 - 1.1839; % rho[water - air] in [kg/m3]
 g = 9.81; % acceleration due to gravity in [m/s2]
 
 % Import a movie
-dropletVideo = VideoReader('20180329_133019.mp4');
+dropletVideo = VideoReader('20180405_161119_ethyleneGlycol.mp4');
 disp('Video has been imported...');
-dropletLocation = [100 550 850];
+dropletLocation = [100 600 900];
 numberOfSegments = 20;
 edgesTolerance = 0.125;
 
 ii = 1;
 
 % Define Time Range
-timeRange = [7.1 7.5]; % in seconds
-timeSkip = 0.1; % in sesconds
+timeRange = [3.5 7]; % in seconds
+timeSkip = 0.2; % in sesconds
 frameSkip = floor(timeSkip * dropletVideo.frameRate);
 frameRange = timeRange * dropletVideo.frameRate;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
