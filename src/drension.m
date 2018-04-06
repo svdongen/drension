@@ -22,8 +22,8 @@ edgesTolerance = 0.125;
 ii = 1;
 
 % Define Time Range
-timeRange = [3.5 7]; % in seconds
-timeSkip = 0.2; % in sesconds
+timeRange = [5 7]; % in seconds
+timeSkip = 0.05; % in sesconds
 frameSkip = floor(timeSkip * dropletVideo.frameRate);
 frameRange = timeRange * dropletVideo.frameRate;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
@@ -50,3 +50,17 @@ while hasFrame(dropletVideo)
 end
 
 disp('Analysis of video completed!');
+
+y = 47.3/1000; % gamma of literature in N/m
+figure;
+scatter(results(:,8),results(:,7))
+hline = refline([0 y]);
+hline.Color = 'r';
+
+figure;
+subplot(3,1,1);
+scatter(results(:,2),results(:,5))
+subplot(3,1,2);
+scatter(results(:,2),results(:,6))
+subplot(3,1,3);
+scatter(results(:,2),results(:,8))
