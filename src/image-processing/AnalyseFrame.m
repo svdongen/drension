@@ -17,6 +17,7 @@ edges_prewitt = edge(gray_image,'Prewitt',edgesTolerance,'both','nothinning');
 % subplot(1,2,1);
 % imshow(I);
 % subplot(1,2,2);
+% figure('Name','Edged Image');
 % imshow(edges_prewitt);
 % linkaxes;
 

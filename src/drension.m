@@ -22,8 +22,8 @@ edgesTolerance = 0.125;
 ii = 1;
 
 % Define Time Range
-timeRange = [5 13]; % in seconds
-timeSkip = 0.2; % in sesconds
+timeRange = [7.1 7.5]; % in seconds
+timeSkip = 0.1; % in sesconds
 frameSkip = floor(timeSkip * dropletVideo.frameRate);
 frameRange = timeRange * dropletVideo.frameRate;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
