@@ -1,4 +1,4 @@
-function [ theta, a, b1, b2, d, zMax ] = NeedleAnalysis( N )
+function [ theta, a, b1, b2, d, zMax ] = NeedleAnalysis( N, numberOfSegments )
 %NEEDLEANALYSIS finds rotation and needle parameters from an edged image with a needle intersecting the top vertically.
 %   N is the binary image ([0 1] containing matrix) to be analyzed.
 %   theta is the angle of rotation and a the gradient
@@ -34,7 +34,7 @@ b2 = mean(b2Points);
 
 % (3) Solve the criterium for the z-range
 % % Define a number of segments to check the z-range for
-numOfSegments = 50;
+numOfSegments = numberOfSegments;
 segmentSize = ceil(min(size(N))/(numOfSegments-1));
 numOfSegments = floor(min(size(N))/segmentSize) + 1;
 % % For each segment, check if too many points are critical

@@ -1,9 +1,9 @@
-function [ left, bottom, right ] = FindDropletEdges( points, criterium )
+function [ left, bottom, right ] = FindDropletEdges( points, criterium, numberOfSegments )
 %FINDDROPLETEDGES Summary of this function goes here
 %   Detailed explanation goes here
 
 % In the x-direction, to find left and right
-numOfSegments = 50;
+numOfSegments = numberOfSegments;
 segmentSize = ceil(max(points(:,1))/(numOfSegments-1));
 numOfSegments = floor(max(points(:,1))/segmentSize) + 1;
 % % For each segment, check if too many points are critical
@@ -16,15 +16,15 @@ for i = 1:numOfSegments
     numOfSegmentPoints = size(segmentPoints(:,1));
     numOfSegmentPoints = numOfSegmentPoints(1);
     if numOfSegmentPoints > criterium
-      criticalLeft = [criticalLeft mean(segmentPoints(:,1))];
-      criticalRight = [criticalRight mean(segmentPoints(:,1))];
+      criticalLeft = [criticalLeft min(segmentPoints(:,1))];
+      criticalRight = [criticalRight max(segmentPoints(:,1))];
     end
 end
 left = min(criticalLeft);
 right = max(criticalRight);
 
 % In the y-direction, to find bottom
-numOfSegments = 50;
+numOfSegments = numberOfSegments;
 segmentSize = ceil(max(points(:,2))/(numOfSegments-1));
 numOfSegments = floor(max(points(:,2))/segmentSize) + 1;
 % % For each segment, check if too many points are critical
@@ -36,7 +36,7 @@ for i = 1:numOfSegments
     numOfSegmentPoints = size(segmentPoints(:,1));
     numOfSegmentPoints = numOfSegmentPoints(1);
     if numOfSegmentPoints > criterium
-      criticalBottom = [criticalBottom mean(segmentPoints(:,2))];
+      criticalBottom = [criticalBottom min(segmentPoints(:,2))];
     end
 end
 bottom = min(criticalBottom);
