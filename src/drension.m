@@ -60,7 +60,10 @@ hline.Color = 'r';
 figure;
 subplot(3,1,1);
 scatter(results(:,2),results(:,5))
+box on;
 subplot(3,1,2);
 scatter(results(:,2),results(:,6))
+box on;
 subplot(3,1,3);
 scatter(results(:,2),results(:,8))
+box on;
