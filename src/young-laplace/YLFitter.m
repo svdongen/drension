@@ -11,7 +11,7 @@ errors = zeros(1,numberOfBs);
 numberOfPoints = max(size(experimental));
 
 % Fit the experimental for each B
-for i = 1:numberOfBs
+parfor i = 1:numberOfBs
     M = MakeDroplet( B(i) );
     curve = [M(:,2) M(:,3)];
     for j = 1:numberOfPoints

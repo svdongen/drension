@@ -13,7 +13,7 @@ deltaRho = 1000*0.997 - 1.1839; % rho[water - air] in [kg/m3]
 g = 9.81; % acceleration due to gravity in [m/s2]
 
 % Import a movie
-dropletVideo = VideoReader('20180405_161119_ethyleneGlycol.mp4');
+dropletVideo = VideoReader('mega_big_file.mp4');
 disp('Video has been imported...');
 dropletLocation = [100 600 900];
 numberOfSegments = 20;
@@ -22,8 +22,8 @@ edgesTolerance = 0.125;
 ii = 1;
 
 % Define Time Range
-timeRange = [5 7]; % in seconds
-timeSkip = 0.05; % in sesconds
+timeRange = [240 300]; % in seconds
+timeSkip = 0.2; % in sesconds
 frameSkip = floor(timeSkip * dropletVideo.frameRate);
 frameRange = timeRange * dropletVideo.frameRate;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
@@ -34,10 +34,10 @@ disp('Results have been initialized...');
 lastRead = 0;
 
 while hasFrame(dropletVideo)
-   disp('Reading next frame...');
-   disp(round(1000*ii/numberOfFrames)/10);
    img = readFrame(dropletVideo);
    if (ii >= frameRange(1)) && (ii <= frameRange(2) && (ii >= lastRead + frameSkip))
+   disp('Reading frame...');
+   disp(round(1000*ii/numberOfFrames)/10);
    disp('Analyzing this frame...');
    lastRead = ii;
    results(ii,1) = ii;
@@ -51,7 +51,7 @@ end
 
 disp('Analysis of video completed!');
 
-y = 47.3/1000; % gamma of literature in N/m
+y = 72.1/1000; % gamma of literature in N/m
 figure;
 scatter(results(:,8),results(:,7))
 hline = refline([0 y]);
