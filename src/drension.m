@@ -13,19 +13,20 @@ deltaRho = 1000*0.997 - 1.1839; % rho[water - air] in [kg/m3]
 g = 9.81; % acceleration due to gravity in [m/s2]
 
 % Import a movie
-dropletVideo = VideoReader('mega_big_file.mp4');
+dropletVideo = VideoReader('VID_20180411_evaporatingWaterDroplet.mp4');
 disp('Video has been imported...');
 dropletLocation = [100 600 900];
 numberOfSegments = 20;
-edgesTolerance = 0.125;
+edgesTolerance = 0.10;
+frameRate = 0.2; % dropletVideo.frameRate;
 
 ii = 1;
 
 % Define Time Range
-timeRange = [240 300]; % in seconds
-timeSkip = 0.2; % in sesconds
-frameSkip = floor(timeSkip * dropletVideo.frameRate);
-frameRange = timeRange * dropletVideo.frameRate;
+timeRange = [0 100]; % in seconds
+timeSkip = 4.9; % in sesconds
+frameSkip = floor(timeSkip * frameRate);
+frameRange = timeRange * frameRate;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
 
 % Analysis
@@ -41,7 +42,7 @@ while hasFrame(dropletVideo)
    disp('Analyzing this frame...');
    lastRead = ii;
    results(ii,1) = ii;
-   results(ii,2) = (ii-1)/dropletVideo.frameRate;
+   results(ii,2) = (ii-1)/frameRate;
    [results(ii,3), results(ii,4), results(ii,5), results(ii,6)] = AnalyseFrame(img, NW, dropletLocation, numberOfSegments, edgesTolerance);
    results(ii,7) = deltaRho * (results(ii,4))^2 * g / (results(ii,3)); % gamma = dRho R0^2 g / B0
    results(ii,8) = (results(ii,3) * results(ii,5)) / (pi * (results(ii,4))^2 * NW); % Wo = Bo * Vd / (R0^2 * NW * pi)

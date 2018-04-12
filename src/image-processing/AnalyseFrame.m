@@ -54,8 +54,10 @@ croppedImage = imcrop(imageToBeCropped, ranges);
 rotatedImage = imrotate(croppedImage, -1*theta);
 
 % PICTURE
-% figure('Name','Rotated Image');
-% imshow(rotatedImage);
+figure('Name','Rotated Image');
+imshow(rotatedImage);
+% msg = 'Error occurred.';
+% error(msg)
 
 [ thetaR, aR, b1R, b2R, dR, zMaxR ] = NeedleAnalysis( rotatedImage, numberOfSegments );
 
@@ -86,13 +88,13 @@ points(:,1) = points(:,1)*resizingFactor;
 points(:,2) = points(:,2)*resizingFactor;
 
 % PICTURE
-% figure('Name','Centered points');
-% hold on;
-% scatter(points(:,1),points(:,2),10,[0.5 0.5 0.5]);
-% scatter(cutOffPoints(:,1),cutOffPoints(:,2),10,[0 0 1]);
+figure('Name','Centered points');
+hold on;
+scatter(points(:,1),points(:,2),10,[0.5 0.5 0.5]);
+scatter(cutOffPoints(:,1),cutOffPoints(:,2),10,[0 0 1]);
 
 % Fitting and Plotting
-iterations = 5;
+iterations = 2;
 BMin = 0.01;
 BMax = 0.5;
 BAccuracy = 0.01;
@@ -124,10 +126,10 @@ Vd = Vd * (needleConversionFactor / resizingFactor)^3;
 R0 = needleConversionFactor * dropletFactor/resizingFactor;
 
 % PICTURE
-% plot(M(:,2),M(:,3),'--y',...
-% 'LineWidth',2);
-% title(['Bo = ' num2str(OptimalB)])
-% daspect([1 1 1])
+plot(M(:,2),M(:,3),'--y',...
+'LineWidth',2);
+title(['Bo = ' num2str(OptimalB)])
+daspect([1 1 1])
 % 
 % figure('Name','Optimization Results');
 % EI = [BSave.' ErrorsSave.'];
