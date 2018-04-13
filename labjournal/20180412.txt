@@ -1,0 +1,19 @@
+Theory about the relation between surface tension and the adsorption of proteins (ovalbumin in our case) to the air/water
+interface:
+We propose that the apparend (measured) surface tension can be decribed as the weighted average of 2 surface tensions,
+the surface tension of air/water and of air/protein (Similar idea to the Cassie-Baxter relation for the contact angle on
+heterogeneous surfaces). As the absorbed amount of protein changes over time, we expect thesurface tension to shift from
+the surface tension of water/air, to the surface tension of protein/air. However, due tointeractions between molecules,
+it is difficult to predict/calculate the surface coverage of the protein. To make matters even more difficult, we did not
+yet consider the denaturation of proteins on the surface (and the influence on the protein/air surface tension).
+
+The adsorption of proteins on surfaces is a long studied subject, as papers can be found as early as 1939 (Langmuir et al.)
+However, during most studies, asumptions were made which do (most likely) not hold for drop tensiometry. In most studies,
+it is assumed that the surface is a perfect sink and all proteins stick to the surface (with infinitely large Ka) and never
+come loose (infinitesimally small Kd). However, during drop tensiometry the available surface area is limited and the
+adsorption of a protein will hinder the adsorption of the next (non-infinite Ka). Also, in other studies, linear (1d) diffusion
+is assumed, as the proteins will diffuse from the bulk solution to the surface (top of the beaker) due to the concentration
+gradient caused by the adsorption of proteins to the surface. However, during drop tensiometry, we have to take into account
+the 3D-radial diffusion. This means that most (if not all) equations based on linear diffusion cannot be used for this system
+ 
+
