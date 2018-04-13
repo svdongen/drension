@@ -17,13 +17,13 @@ dropletVideo = VideoReader('VID_20180411_evaporatingWaterDroplet.mp4');
 disp('Video has been imported...');
 dropletLocation = [100 600 900];
 numberOfSegments = 20;
-edgesTolerance = 0.10;
+edgesTolerance = 0.16;
 frameRate = 0.2; % dropletVideo.frameRate;
 
 ii = 1;
 
 % Define Time Range
-timeRange = [0 100]; % in seconds
+timeRange = [0 200]; % in seconds
 timeSkip = 4.9; % in sesconds
 frameSkip = floor(timeSkip * frameRate);
 frameRange = timeRange * frameRate;

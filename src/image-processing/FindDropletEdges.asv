@@ -56,9 +56,7 @@ end
 % % % Find the average x for which the absolute gradient |dx/dy| is smallest
 GR = gradient(leftPoints(:,2),leftPoints(:,1));
 GR = abs(GR);
-leftY = mean(leftPoints((GR == min(GR)),1));
-[~, index] = min(abs(leftPoints(:,1)-leftY));
-left = leftPoints(index,2);
+left = mean(leftPoints((GR == min(GR)),2));
 
 % % Right Edge
 rightYs = unique(points(((points(:,1) > (left+right)/2) & (points(:,2) <= zMax)),2));
@@ -71,8 +69,7 @@ end
 GR = gradient(rightPoints(:,2),rightPoints(:,1));
 GR = abs(GR);
 rightY = mean(rightPoints((GR == min(GR)),1));
-[~, index] = min(abs(rightPoints(:,1)-rightY));
-right = rightPoints(index,2);
+[dis indexmin(abs(N-rightY))
 
 % % Bottom Edge
 bottomXs = unique(points(((points(:,2) <= zMax) & (points(:,1) >= left + (right - left)/4 ) & (points(:,1) <= right - (right - left)/4 )),1));
@@ -84,9 +81,16 @@ end
 % % % Find the average x for which the absolute gradient |dx/dy| is smallest
 GR = gradient(bottomPoints(:,2),bottomPoints(:,1));
 GR = abs(GR);
-bottomX = mean(bottomPoints((GR == min(GR)),1));
-[~, index] = min(abs(bottomPoints(:,1)-bottomX));
-bottom = bottomPoints(index,2);
+bottom = mean(bottomPoints((GR == min(GR)),2));
+
+disp([left right]);
+figure;
+subplot(2,1,1);
+scatter(points(:,2),points(:,1));
+hold on;
+scatter(rightPoints(:,1),rightPoints(:,2));
+subplot(2,1,2);
+scatter(rightPoints(:,1),abs(gradient(rightPoints(:,2),rightPoints(:,1))));
 
 end
 

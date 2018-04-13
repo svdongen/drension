@@ -54,10 +54,8 @@ croppedImage = imcrop(imageToBeCropped, ranges);
 rotatedImage = imrotate(croppedImage, -1*theta);
 
 % PICTURE
-figure('Name','Rotated Image');
-imshow(rotatedImage);
-% msg = 'Error occurred.';
-% error(msg)
+% figure('Name','Rotated Image');
+% imshow(rotatedImage);
 
 [ thetaR, aR, b1R, b2R, dR, zMaxR ] = NeedleAnalysis( rotatedImage, numberOfSegments );
 
@@ -65,7 +63,8 @@ imshow(rotatedImage);
 % Extracting points from the droplet that are suitable to be fitted against
 % the YL-equation
 points = ImageToPoints(rotatedImage);
-[ dropLeft, dropBottom, dropRight ] = FindDropletEdges(points, 25, numberOfSegments);
+zMaxEdgeing = zMaxR;
+[ dropLeft, dropBottom, dropRight ] = FindDropletEdges(points, 25, numberOfSegments, zMaxEdgeing);
 
 % x0 = (b1R+b2R)/2;
 x0 = (dropLeft + dropRight)/2;
