@@ -1,0 +1,17 @@
+-difussion kinetics in relation to surface tension (difussion limited?)
+	dissociation constant
+	difussion coefficient
+
+-PC/camera
+-equation theta for ovalbumine
+-surface tension solid?
+
+>what did we do?
+-measure surface tension of ovalbumine solution with wilhemy plate for 30 minutes to see when surface tension stabilizes. we fit these data in excel with ...
+-measure surface tension of water over longer time periods with the set up in a box with a cup of water to minimize droplet evaporation. Droplet evaporation still occured, therefore we assumed that the air was not yet saturated enough and decided to use cups with hot water the next time
+-found literature about adsorption kinetics in relation to surface tension
+-analysed video of droplets, this did not go well and yielded unexpected values. ...
+
+>what are we going to do
+-determine whether protein adsorption kinetics are similar to surfactant adsorption kinetics and which equations are of importance
+-analyse the found literature
