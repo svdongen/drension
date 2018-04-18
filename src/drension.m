@@ -8,8 +8,9 @@ mkdir(workingDir);
 mkdir(workingDir,'images');
 
 % Input parameters
-NW = 1.8/1000; %needle width in [m]
-deltaRho = 1000*0.997 - 1.1839; % rho[water - air] in [kg/m3]
+NW = 1.82/1000; %needle width in [m]
+
+deltaRho = 1000*0.997; % - 1.1839; % rho[water - air] in [kg/m3]
 g = 9.81; % acceleration due to gravity in [m/s2]
 
 % Import a movie
@@ -23,10 +24,10 @@ frameRate = 0.2; % dropletVideo.frameRate;
 ii = 1;
 
 % Define Time Range
-timeRange = [0 200]; % in seconds
+timeRange = [100 400]; % in seconds
 timeSkip = 4.9; % in sesconds
 frameSkip = floor(timeSkip * frameRate);
-frameRange = timeRange * frameRate;
+frameRange = (timeRange * frameRate) + 1;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
 
 % Analysis
