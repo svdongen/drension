@@ -20,13 +20,13 @@ disp('Video has been imported...');
 dropletLocation = [100 600 900];
 numberOfSegments = 20;
 edgesTolerance = 0.16;
-frameRate = 0.2; % dropletVideo.frameRate;
+frameRate = 1; % dropletVideo.frameRate;
 
 ii = 1;
 
 % Define Time Range
-timeRange = [100 400]; % in seconds
-timeSkip = 4.9; % in sesconds
+timeRange = [1 2190]; % in seconds
+timeSkip = 0.9; % in sesconds
 frameSkip = floor(timeSkip * frameRate);
 frameRange = (timeRange * frameRate) + 1;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
