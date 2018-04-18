@@ -15,6 +15,7 @@ g = 9.81; % acceleration due to gravity in [m/s2]
 
 % Import a movie
 dropletVideo = VideoReader('VID_20180418_ovalbumin_0-1gL.mp4');
+filename = 'results_ovalbumin_0-1gL.mat';
 disp('Video has been imported...');
 dropletLocation = [100 600 900];
 numberOfSegments = 20;
@@ -47,6 +48,7 @@ while hasFrame(dropletVideo)
    [results(ii,3), results(ii,4), results(ii,5), results(ii,6)] = AnalyseFrame(img, NW, dropletLocation, numberOfSegments, edgesTolerance);
    results(ii,7) = deltaRho * (results(ii,4))^2 * g / (results(ii,3)); % gamma = dRho R0^2 g / B0
    results(ii,8) = (results(ii,3) * results(ii,5)) / (pi * (results(ii,4))^2 * NW); % Wo = Bo * Vd / (R0^2 * NW * pi)
+   save(filename)
    end
    ii = ii+1;
 end
@@ -70,5 +72,4 @@ subplot(3,1,3);
 scatter(results(:,2),results(:,8))
 box on;
 
-filename = 'results_ovalbumin_0-1gL.mat';
 save(filename)
