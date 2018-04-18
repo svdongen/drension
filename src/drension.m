@@ -35,6 +35,7 @@ numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
 results = zeros(numberOfFrames,8); % Frame, Time, B0, R0, Vd, Error, Gamma, Wo
 disp('Results have been initialized...');
 lastRead = 0;
+lastSaved = 0;
 
 while hasFrame(dropletVideo)
    img = readFrame(dropletVideo);
@@ -48,7 +49,10 @@ while hasFrame(dropletVideo)
    [results(ii,3), results(ii,4), results(ii,5), results(ii,6)] = AnalyseFrame(img, NW, dropletLocation, numberOfSegments, edgesTolerance);
    results(ii,7) = deltaRho * (results(ii,4))^2 * g / (results(ii,3)); % gamma = dRho R0^2 g / B0
    results(ii,8) = (results(ii,3) * results(ii,5)) / (pi * (results(ii,4))^2 * NW); % Wo = Bo * Vd / (R0^2 * NW * pi)
-   save(filename)
+   if ii > (lastSaved + 10)
+    save(filename)
+    lastSaved = ii;
+   end
    end
    ii = ii+1;
 end
