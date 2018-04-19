@@ -14,8 +14,8 @@ deltaRho = 1000*0.997; % - 1.1839; % rho[water - air] in [kg/m3]
 g = 9.81; % acceleration due to gravity in [m/s2]
 
 % Import a movie
-dropletVideo = VideoReader('VID_20180418_ovalbumin_0-1gL.mp4');
-filename = 'results_ovalbumin_0-1gL.mat';
+dropletVideo = VideoReader('VID_20180418_ovalbumin-10gL.mp4');
+filename = 'results_ovalbumin-10gL.mat';
 disp('Video has been imported...');
 dropletLocation = [100 600 900];
 numberOfSegments = 20;
@@ -25,7 +25,7 @@ frameRate = 1; % dropletVideo.frameRate;
 ii = 1;
 
 % Define Time Range
-timeRange = [1 2190]; % in seconds
+timeRange = [1 2010]; % in seconds
 timeSkip = 0.9; % in sesconds
 frameSkip = floor(timeSkip * frameRate);
 frameRange = (timeRange * frameRate) + 1;
@@ -35,6 +35,7 @@ numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
 results = zeros(numberOfFrames,8); % Frame, Time, B0, R0, Vd, Error, Gamma, Wo
 disp('Results have been initialized...');
 lastRead = 0;
+lastSaved = 0;
 
 while hasFrame(dropletVideo)
    img = readFrame(dropletVideo);
@@ -48,7 +49,10 @@ while hasFrame(dropletVideo)
    [results(ii,3), results(ii,4), results(ii,5), results(ii,6)] = AnalyseFrame(img, NW, dropletLocation, numberOfSegments, edgesTolerance);
    results(ii,7) = deltaRho * (results(ii,4))^2 * g / (results(ii,3)); % gamma = dRho R0^2 g / B0
    results(ii,8) = (results(ii,3) * results(ii,5)) / (pi * (results(ii,4))^2 * NW); % Wo = Bo * Vd / (R0^2 * NW * pi)
-   save(filename)
+   if ii > (lastSaved + 10)
+    save(filename)
+    lastSaved = ii;
+   end
    end
    ii = ii+1;
 end
