@@ -93,10 +93,10 @@ points(:,2) = points(:,2)*resizingFactor;
 % scatter(cutOffPoints(:,1),cutOffPoints(:,2),10,[0 0 1]);
 
 % Fitting and Plotting
-iterations = 5;
-BMin = 0.01;
-BMax = 0.5;
-BAccuracy = 0.01;
+iterations = 2;
+BMin = 0.25;
+BMax = 0.45;
+BAccuracy = 0.001;
 
 BSave = [];
 ErrorsSave = [];
