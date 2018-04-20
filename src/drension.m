@@ -25,8 +25,8 @@ frameRate = 1; % dropletVideo.frameRate;
 ii = 1;
 
 % Define Time Range
-timeRange = [0 1500]; % in seconds
-timeSkip = 25; % in sesconds
+timeRange = [0 3000]; % in seconds
+timeSkip = 1; % in sesconds
 frameSkip = floor(timeSkip * frameRate);
 frameRange = (timeRange * frameRate) + 1;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
