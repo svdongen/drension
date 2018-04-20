@@ -42,7 +42,7 @@ end
 bottom = min(criticalBottom);
 
 zMax = zMax + bottom;
-zMax = 1*(zMax - bottom)/2 + bottom;
+zMax = 1*(zMax - bottom)/3 + bottom;
 
 % Refinement
 % % Left Edge
@@ -81,6 +81,8 @@ for i = 1:max(size(bottomXs))
     bottomPoints(i,1) = bottomXs(i);
     bottomPoints(i,2) = mean(points(((points(:,1) == bottomXs(i)) &  (points(:,2) <= zMax)),2));
 end
+% figure('Name','Find Bottom points');
+% scatter(bottomPoints(:,1),bottomPoints(:,2));
 % % % Find the average x for which the absolute gradient |dx/dy| is smallest
 GR = gradient(bottomPoints(:,2),bottomPoints(:,1));
 GR = abs(GR);
