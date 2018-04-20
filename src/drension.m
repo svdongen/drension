@@ -14,8 +14,8 @@ deltaRho = 1000*0.997; % - 1.1839; % rho[water - air] in [kg/m3]
 g = 9.81; % acceleration due to gravity in [m/s2]
 
 % Import a movie
-dropletVideo = VideoReader('VID_20180419_ovalbumin-1gL-v2.mp4');
-filename = 'results_VID_20180419_ovalbumin-1gL-v2-reanalysis.mat';
+dropletVideo = VideoReader('VID_20180420_ovalubmin_2-5gL.mp4');
+filename = 'results_VID_20180420_ovalubmin_2-5gL.mat';
 disp('Video has been imported...');
 dropletLocation = [100 600 900];
 numberOfSegments = 20;
@@ -25,8 +25,8 @@ frameRate = 1; % dropletVideo.frameRate;
 ii = 1;
 
 % Define Time Range
-timeRange = [0 3000]; % in seconds
-timeSkip = 1; % in sesconds
+timeRange = [0 2750]; % in seconds
+timeSkip = 0.9; % in sesconds
 frameSkip = floor(timeSkip * frameRate);
 frameRange = (timeRange * frameRate) + 1;
 numberOfFrames = ceil(dropletVideo.frameRate * dropletVideo.duration);
