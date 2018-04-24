@@ -81,3 +81,7 @@ box on;
 
 save(filename)
 
+[f,xi] = ksdensity(subSet(subSet(:,2)<55,7)); 
+figure
+plot(xi,f);
+
